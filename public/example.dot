@@ -1,6 +1,7 @@
 digraph {
 	a -> b;
 	b -> c;
+        b -> e;
 	c -> d;
 	d -> a;
 }
