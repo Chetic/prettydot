@@ -1,0 +1,15 @@
+digraph "less" {
+	rankdir=LR;
+	node [shape=box];
+	"less" -> "libtinfo5" [color=blue];
+	"libtinfo5" -> "sensible-utils" [color=blue];
+	"less" -> "debianutils" [color=blue,label="(>= 1.8)"];
+	"debianutils" -> "sensible-utils" [color=blue];
+	"debianutils" -> "debianutils" [color=red];
+	"less" -> "less" [color=red];
+	"less" [style="setlinewidth(2)"]
+}
+// Excluded dependencies:
+// libc6 multiarch-support
+// total size of all shown packages: 1207296
+// download size of all shown packages: 283108

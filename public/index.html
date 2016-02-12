@@ -33,7 +33,6 @@
     </div>
 </div>
 <script type="text/javascript">
-
     var m = [20, 120, 20, 120],
         w = 1280 - m[1] - m[3],
         h = 800 - m[0] - m[2],
@@ -52,10 +51,10 @@
         .append("svg:g")
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-    $.get( "debgraph.dot", function( data ) {
+    $.get( "jdepend-report.dot", function( data ) {
         var graph = graphlibDot.read(data);
 
-        root = {"name": graph.nodes()[0], "children": []};
+        root = {"name": graph.nodes()[16], "children": []};
         root.x0 = h / 2;
         root.y0 = 0;
         $("#footer").prepend(root.name);
@@ -66,6 +65,31 @@
             if (node == false) {
                 node = {"name": nodeName, "children": []};
             }
+
+Array.prototype.contains = function(v) {
+    for(var i = 0; i < this.length; i++) {
+        if(this[i] === v) return true;
+    }
+    return false;
+};
+
+Array.prototype.unique = function() {
+    var arr = [];
+    for(var i = 0; i < this.length; i++) {
+        if(!arr.contains(this[i])) {
+            arr.push(this[i]);
+        }
+    }
+    return arr; 
+}
+
+            // Gather all unique 'from'-nodes to figure out the number of trees
+            varr = [];
+            for (j = 0; j < graph.edges().length; j++) {
+                varr.push(graph.edges()[j].v);
+            }
+            rootnodes = varr.unique();
+            // --------------------------
             for (j = 0; j < graph.edges().length; j++) {
                 if (graph.edges()[j].v == nodeName && graph.edges()[j].v != graph.edges()[j].w) {
                     var childName = graph.edges()[j].w;
