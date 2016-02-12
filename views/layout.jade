@@ -2,6 +2,18 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/style.css')
+    script(src='js/jquery-2.1.4.js')
+    script(src='js/d3.js')
+    script(src='js/d3.layout.js')
+    script(src='js/graphlib-dot.js')
+    script(src='js/prettydot.js')
   body
     block content
+    div(id='body')
+      div(id='footer')
+        div(class='hint')
+          p Dependency graph
+    script(src='js/prettydot.js')
+    input(type='text' name='txtDebugInput')
+    button(onclick='reloadGraph();') submit

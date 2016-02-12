@@ -213,3 +213,8 @@ Array.prototype.unique = function() {
             d._children = null;
         }
     }
+
+    function reloadGraph() {
+        root.name = $("txtDebugInput").text;
+        update(root);
+    }
