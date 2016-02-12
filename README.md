@@ -1,4 +1,13 @@
 # prettydot
+
+Installation:
+=============
+> sudo apt-get install npm git
+> git clone git@github.com:Chetic/prettydot
+> sudo npm install
+> nodejs bin/www
+> chrome 127.0.0.1:3311
+
 Goal:
 A .dot-file viewer that acts like it's the 2000s
 
