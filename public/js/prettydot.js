@@ -16,6 +16,23 @@
         .append("svg:g")
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
+    Array.prototype.contains = function(v) {
+        for(var i = 0; i < this.length; i++) {
+            if(this[i] === v) return true;
+        }
+        return false;
+    };
+
+    Array.prototype.unique = function() {
+        var arr = [];
+        for(var i = 0; i < this.length; i++) {
+            if(!arr.contains(this[i])) {
+                arr.push(this[i]);
+            }
+        }
+        return arr;
+    };
+
     $.get( "example.dot", function( data ) {
         var graph = graphlibDot.read(data);
 
@@ -24,6 +41,14 @@
         root.y0 = 0;
         $("#footer").prepend(root.name);
 
+        // Gather all unique 'from'-nodes to figure out the number of trees
+        varr = [];
+        for (j = 0; j < graph.edges().length; j++) {
+            varr.push(graph.edges()[j].v);
+        }
+        rootnodes = varr.unique();
+        // --------------------------
+
         for (i = 0; i < graph.nodes().length; i++) {
             var nodeName = graph.nodes()[i];
             var node = findNode(nodeName, root);
@@ -31,30 +56,6 @@
                 node = {"name": nodeName, "children": []};
             }
 
-Array.prototype.contains = function(v) {
-    for(var i = 0; i < this.length; i++) {
-        if(this[i] === v) return true;
-    }
-    return false;
-};
-
-Array.prototype.unique = function() {
-    var arr = [];
-    for(var i = 0; i < this.length; i++) {
-        if(!arr.contains(this[i])) {
-            arr.push(this[i]);
-        }
-    }
-    return arr; 
-}
-
-            // Gather all unique 'from'-nodes to figure out the number of trees
-            varr = [];
-            for (j = 0; j < graph.edges().length; j++) {
-                varr.push(graph.edges()[j].v);
-            }
-            rootnodes = varr.unique();
-            // --------------------------
             for (j = 0; j < graph.edges().length; j++) {
                 if (graph.edges()[j].v == nodeName && graph.edges()[j].v != graph.edges()[j].w) {
                     var childName = graph.edges()[j].w;
@@ -83,7 +84,7 @@ Array.prototype.unique = function() {
             }
             $("body").append(strgraph + "<br/>");
         }
-    })
+    });
 
     function findNode(name, currentNode) {
         var i,
