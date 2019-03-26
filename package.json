@@ -16,7 +16,7 @@
     "express": "~4.13.1",
     "graphlib-dot": "^0.6.2",
     "jade": "~1.11.0",
-    "morgan": "~1.6.1",
+    "morgan": ">=1.9.1",
     "serve-favicon": "~2.3.0"
   }
 }
